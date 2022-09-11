@@ -1,13 +1,51 @@
+<!-- n_3 -->
+<!-- basically define the template base html which will be reused everywhere...
+It is like express in nodejs. 
+Here {% block head %}{% endblock %} are from Jinja
+Good info on jinja: https://www.youtube.com/watch?v=NKJV0ekmo4U&ab_channel=TheCodex
+(Will give a vibe of using ReactJS)
+
+Below is a minimal template that illustrates a few basics using the default Jinja configuration:
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    {% block head %}{% endblock %}
+    <title>My Webpage</title>
 </head>
 <body>
-    {% block body %}{% endblock %}
+    <ul id="navigation">
+    {% for item in navigation %}
+        <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
+    {% endfor %}
+    </ul>
+    <h1>My Webpage</h1>
+    {{ a_variable }}
+    {# a comment #}
 </body>
+</html>
+The following example shows the default configuration settings. 
+There are a few kinds of delimiters. The default Jinja delimiters are configured as follows:
+***
+{% ... %} for Statements
+{{ ... }} for Expressions to print to the template output
+{# ... #} for Comments not included in the template output
+
+More info on Jinja: https://jinja.palletsprojects.com/en/3.0.x/templates/
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <!-- url_for in href can be ignored & usual path can be given for css -->
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    {% block body %}{% endblock %}
+  </body>
 </html>

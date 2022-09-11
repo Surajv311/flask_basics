@@ -7,6 +7,14 @@
 
 <div class="content">
   <h1 style="text-align: center">Task Master</h1>
+  <!--  UNNECESSSARY CODE... YOU CAN IGNORE UNDERSTANDING IT...not top priority to understand -->
+  <!-- Only thing to understand is we have added an if condition here using Jinja, & we render this part of page if there are no data in todolist, if its there then this part is skipped...
+hence you just see how if condition used in Jinja
+Since if you recall:
+{% ... %} for Statements
+{{ ... }} for Expressions to print to the template output
+{# ... #} for Comments not included in the template output
+-->
   {% if tasks|length < 1 %}
   <h4 style="text-align: center">There are no tasks. Create one below!</h4>
   {% else %}
@@ -16,11 +24,17 @@
       <th>Added</th>
       <th>Actions</th>
     </tr>
+
+    <!-- n_14 Using Jinja syntax, we are looping through the tasks... and rendering them in tables. -->
     {% for task in tasks %}
     <tr>
       <td>{{ task.content }}</td>
       <td>{{ task.date_created.date() }}</td>
       <td>
+        <!-- n_16, got the id of the task we want to delete from the form we have defined
+        <input type="text" name="content" id="content" />
+        here we are getting the `id` of the content..., i.e name of the input_type which is 'content'... 
+        -->
         <a href="/delete/{{task.id}}">Delete</a>
         <br />
         <a href="/update/{{task.id}}">Update</a>

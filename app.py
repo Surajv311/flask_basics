@@ -77,18 +77,22 @@ def index():
         return render_template('index.html', tasks=tasks)
 
 
+# n_15 , adding delete route, added <int:id> to specifically uniquely redirect to this id to delete it
 @app.route('/delete/<int:id>')
 def delete(id):
     task_to_delete = Todo.query.get_or_404(id)
-
+# got the whole row data with that id using SQLAlchemy Sqllite querying logic to delete it later
     try:
         db.session.delete(task_to_delete)
-        db.session.commit()
+        db.session.commit()  # committing and redirecting
         return redirect('/')
     except:
         return 'There was a problem deleting that task'
 
 
+# n_final... Similarly coding the update route...
+# Also for deployment we can use heroku, create a procfile & deploy..
+# Just for reference if stuck: https://stackoverflow.com/questions/38851564/heroku-gunicorn-procfile
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
     task = Todo.query.get_or_404(id)
